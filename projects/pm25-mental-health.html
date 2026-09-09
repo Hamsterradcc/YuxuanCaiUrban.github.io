@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Long-term PM2.5 Exposure and Mental Health Disparities: A Prospective Analysis of the All of Us Research Program — Yuxuan Cai</title>
-  <meta name="description" content="Evaluates the association between long-term fine particulate matter (PM2.5) exposure and incident depression and anxiety in a large, diverse cohort, and wh">
+  <meta name="description" content="An interactive research story about long-term PM2.5 exposure, anxiety, depression, and environmental inequity in the All of Us Research Program.">
   <link rel="canonical" href="https://yuxuancai.com/projects/pm25-mental-health.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,9 +83,11 @@
     .pager .lbl { display: block; font-size: 10px; letter-spacing: .12em;
       text-transform: uppercase; opacity: .6; margin-bottom: 4px; }
   </style>
+  <link rel="stylesheet" href="../assets/research-story.css">
 </head>
 <body>
-  <div class="container">
+  <div id="research-story" hidden></div>
+  <div class="container" id="research-brief">
     <header>
       <a href="../index.html#projects" class="back-btn">← Back to Projects</a>
       <div class="hud-info">JOURNAL ARTICLE // 2025</div>
@@ -127,5 +129,9 @@
   </div>
   <script src="../assets/pubcover.js"></script>
   <script>applyPubCovers();</script>
+  <script src="../assets/stories/pm25.js"></script>
+  <script src="../assets/stories/pm25-narrative.js"></script>
+  <script src="../assets/night-guide.js"></script>
+  <script src="../assets/research-story.js"></script>
 </body>
 </html>
