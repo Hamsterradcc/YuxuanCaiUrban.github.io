@@ -1155,12 +1155,12 @@ a.nd-text:hover,a.nd-text:focus-visible{color:var(--accent);text-decoration:unde
       <div class="page-footer"><div class="pf-left">© <span class="yr">2026</span> Yuxuan Cai · UNC Chapel Hill</div><div class="pf-right"><a href="https://scholar.google.com/citations?user=V1_-l2IAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Scholar ↗</a></div></div>
     </section>
 
-    <!-- NEWS — the night guide types the log; the list is plain HTML so it reads without JS -->
+    <!-- NEWS — someone at the desk types the log; the list is plain HTML so it reads without JS -->
     <section class="page" id="page-news">
       <div class="s-head"><div class="eyebrow">01 · News</div><h2 class="s-title reveal" tabindex="-1">Latest <em>news</em></h2></div>
       <div class="news-desk reveal">
         <div class="nd-scene" title="Click to skip the typing">
-          <canvas id="nd-canvas" width="160" height="120" role="img" aria-label="Pixel illustration: the night guide typing on a laptop at a desk, the city lit up in the window behind"></canvas>
+          <canvas id="nd-canvas" width="160" height="120" role="img" aria-label="Pixel illustration: someone in headphones, seen from behind, typing at a desk at night; the monitor shows this log and the city glows in the window"></canvas>
         </div>
         <div class="nd-term">
           <div class="nd-bar" aria-hidden="true"><i></i><i></i><i></i><span>~/news — updates.log</span></div>
@@ -4467,7 +4467,7 @@ function stopResearchGlobe(){ if(rGlobe) rGlobe.pauseAnimation(); }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) stopResearchGlobe(); else if(document.querySelector('#page-projects.active')) startResearchGlobe(); });
 
 // ── NEWS DESK ──
-// The night guide from the walk works late, seen from behind; the log beside
+// Someone in headphones works late, seen from behind; the log beside
 // the scene is what is on the monitor. The first visit types the newest entries
 // and streams the rest, the hand moves only while text is being typed, and each
 // printed paper lands on the stack on the desk. A click or a key skips the typing.
@@ -4541,7 +4541,7 @@ const newsDesk=(()=>{
 
   // ── the scene: 160×120 art pixels, scaled by whole numbers. The wall and
   // desk are baked wider (BW) so the room extends sideways to fill the frame.
-  // The guide is seen from behind, so the screen faces us and mirrors the log ──
+  // The figure is seen from behind, so the screen faces us and mirrors the log ──
   const W=160,H=120,BW=240,OX=40,DESK=70, ctx=cv.getContext('2d');
   let VW=W;
   const rnd=(s=>()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;})(20261103);
@@ -4608,53 +4608,160 @@ const newsDesk=(()=>{
     px(g,'#e8dff0',128,66,2,1); px(g,'#e8dff0',129,67,1,2); px(g,'#e8dff0',128,69,2,1);
   })();
 
-  // the guide from behind: head (hat, hair, ears) and body (coat, scarf) are
-  // separate so the head can nod while the hands rest
-  const head=mk(W,H), body=mk(W,H), chair=mk(W,H);
-  (()=>{const g=head.getContext('2d');
-    px(g,'#120a18',52,33,13,1); px(g,'#120a18',51,34,1,1); px(g,'#120a18',65,34,1,1);
-    px(g,'#120a18',50,35,1,12); px(g,'#120a18',66,35,1,12);
-    px(g,'#1b1230',52,34,13,1); px(g,'#1b1230',51,35,15,12);
-    px(g,'#3b2f60',52,35,1,9); px(g,'#3b2f60',53,34,3,1); px(g,'#110a1c',64,35,1,12);
-    px(g,'#6b2748',51,44,15,3); px(g,'#93405f',51,44,15,1);
-    px(g,'#1b1230',45,47,27,1); px(g,'#3b2f60',45,47,6,1); px(g,'#120a18',44,48,29,1); px(g,'#120a18',44,47,1,1); px(g,'#120a18',72,47,1,1);
-    px(g,'#120a18',47,50,1,4); px(g,'#ddb5a1',48,50,1,4); px(g,'#c8a08e',48,53,1,1);
-    px(g,'#120a18',69,50,1,4); px(g,'#c8a08e',68,50,1,4);
-    px(g,'#1b1a19',49,49,19,7); px(g,'#1b1a19',50,56,17,1); px(g,'#1b1a19',52,57,13,1);
-    for(const x of [54,56,58,60,62]) px(g,'#1b1a19',x,58,1,1);
-    for(const [x,y,h] of [[51,50,4],[54,49,6],[57,50,5],[60,49,6],[63,50,5],[66,50,3]]) px(g,'#37332f',x,y,1,h);
-  })();
-  (()=>{const g=body.getContext('2d');
-    px(g,'#c8a08e',54,57,9,4); px(g,'#a98270',61,57,2,4);
-    const span=y=>y<=62?[47,69]:y===63?[44,72]:y===64?[42,74]:y===65?[40,76]:y<72?[39,77]:[38,78];
-    for(let y=62;y<H;y++){const [a,b]=span(y);
-      px(g,'#120a18',a-1,y,b-a+3,1); px(g,'#2a2238',a,y,b-a+1,1);
-      px(g,'#3d3360',a,y,3,1); px(g,'#1b1526',b-1,y,2,1);}
-    px(g,'#120a18',47,61,23,1); px(g,'#3d3360',44,63,8,1);
-    px(g,'#1b1526',58,70,1,H-70);
-    px(g,'#6e2d4b',51,59,15,1); px(g,'#6e2d4b',49,60,19,4); px(g,'#944068',49,60,19,1); px(g,'#4a1c34',49,63,19,1);
-    px(g,'#6e2d4b',49,64,5,14); px(g,'#944068',49,64,1,14); px(g,'#4a1c34',53,64,1,14);
-    for(const x of [49,51,53]) px(g,'#4a1c34',x,78,1,1);
-  })();
-  (()=>{const g=chair.getContext('2d');
-    px(g,'#120a18',45,85,27,1); px(g,'#120a18',43,86,31,1); px(g,'#120a18',41,87,35,H-87);
-    px(g,'#2b1d3d',45,86,27,1); px(g,'#2b1d3d',43,87,31,1); px(g,'#2b1d3d',42,88,33,H-88);
-    px(g,'#3a2852',45,86,27,1); px(g,'#3a2852',42,88,1,H-88);
-    for(const x of [52,64]) px(g,'#1f1530',x,90,1,H-90);
-    px(g,'#1f1530',43,101,32,1);
-  })();
-  // the monitor's light catches the right-hand edge of the figure
+  // the figure from behind, drawn as string art: one character per pixel, '.'
+  // clear. Clear pixels that touch paint get the outline colour. The head is
+  // its own layer so it can nod; the hand is too, so it can tap the keys
+  const PAL={
+  // PAL-BEGIN
+    d:'#1e1318',h:'#33212a',l:'#553944',L:'#86606c',b:'#33314c',B:'#6c69a4',u:'#24223a',U:'#4b4872',m:'#ff5ca0',s:'#d8aa94',S:'#a3766a',k:'#12202b',w:'#1c3240',W:'#294757',y:'#3b6273',i:'#0f1a23',r:'#1b1829',R:'#2b2742',T:'#48426a'
+  // PAL-END
+  };
+  const FIG={
+  // FIG-BEGIN
+    head:[47,36,[
+      '.........BBbbbbbBB',
+      '.......BBb..hh...bbB',
+      '......Bb.hhhhhhhh..bBB',
+      '.....Bbhhhhhhhhhhhh..bB',
+      '....Bbhdhhhhhhhhhhhh..B',
+      '....bddhhhllLLLLhhhhh.bB',
+      '...BbdhdllllLLLLLLhhh..b',
+      '...bddlllllllhhlLLLlhh.bb',
+      '..bbdlllhhhlhhhhhhLlUuuuu',
+      '...dlldlhhhhhhhhhhlUUUUUUU',
+      '.UudldhdhhhhhhhhhhhuUuuuuu',
+      'uUudlddhhhhhhhhhhhhuUuuuuu',
+      'uUudddhdhhhhhhhhhhhuUuuuuu',
+      'uuu.dddhhhhhhhhhhhhuUuuuuu',
+      'uuu.ddhdhhhhdhhhhdhuUuuuuu',
+      'uuu.ddddhhhhdhhhhdhuUuuumu',
+      '.uu..dddhhhhdhhhhdhuUuuuuu',
+      '.....ddhhhhhdhhhhhduUuuuuu',
+      '....hhhhhhhhdhdhhhhhUuuuu',
+      '....dhhdddhdSdSdhddhhd',
+      '.....dd.SSdSSSSSdS.dd',
+      '........SssssssssS',
+      '........SssssssssS']],
+    body:[37,59,[
+      '.................ykkiiiiiikkyy',
+      '..............Wyykkiiiiiiiikkyyyy',
+      '............WWyyyWkkiiiiiikkWyyyyyy',
+      '..........WWWyyyWWWWWkkkkWWWWWyyywyyy',
+      '.........WWwwyyWWWWWWWWWWWWWWWWyywwwyyw',
+      '......wwwwwwwyyyWWWWWWWWWWWWWWyyywwwwwwww',
+      '.....wwwwwwwwwWWWWWWWWWWWWWWWWWWwwwwwwwwwW',
+      '....kwwwwwwwwwkwwwwWWWWWWWWwwwwkwwwwwwwwwW',
+      '....kwwwwwwwwwwkkwwwwwwwwwwwwkkwwwwwwwwwwWW',
+      '....kwwwwwwwwwwwwkkkkwwwwkkkkwwwwwwwwwwwwWW',
+      '...kkwwwwwwwwwWWWwwwwkkkkwwwwwWWWwwwwwwwwWW........yyyy',
+      '...kkwwwwwwwwWwwwwwwwwwwwwwwwwwwwWwwwwwwwWWW......yyyyyy',
+      '...kkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWWW.....Wyyyyyy',
+      '..kkkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWWW....WWWyyyy',
+      '..kkkwwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwkWWWW..WWWWWyy',
+      '..kkkwwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwkWWWW.WWWWWWW',
+      '.kkkkwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwkWWWWWWWWWWW',
+      '.kkkkwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwkWWWWWWWWW',
+      '.kkkkwkwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWwwkWWWWWWWW',
+      'kkkkkwkwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWwwkWWWWWWW',
+      'kkkkkwwwkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWwwWkWWWWW',
+      'kkkkkwwWkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWywWWWWWW',
+      'kkkkkwwWkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWywWWWWWW',
+      '.kkkkw.WkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwWy.WWWWW',
+      '..kkk...kkwwwwwwwwwwwwwwwwwwwwwwwwwwwWW...WWW',
+      '........WkwwwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '........WkwwwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '........WkwwwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '........WkwwwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '.........kkwwwwwwwwwwwwwwwwwwwwwwwwwWW',
+      '.........WkwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '.........WkwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '.........WkwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '.........WkwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '.........WkwwwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........kkwwwwwwwwwwwwwwwwwwwwwwwWW',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy',
+      '..........WkwwwwwwwwwwwwwwwwwwwwwwwWy']],
+    hand:[89,68,[
+      '.sssS',
+      'sssssS',
+      '.S.S.S']],
+    chair:[49,89,[
+      '...TTTTTTTTTTTTTTTTT',
+      '.TTTTTTTTTTTTTTTTTTTTT',
+      '.TrrRrrrRrrrRrrrRrrrrT',
+      'TTrRrrrRrrrRrrrRrrrRrTT',
+      'RrrrrrRrrrRrrrRrrrRrrrR',
+      'RrrrrRrrrRrrrRrrrRrrrrR',
+      '.RrrRrrrRrrrRrrrRrrrrR',
+      '.RrrrrrRrrrRrrrRrrrrrR',
+      '.RrrrrRrrrRrrrRrrrRrrR',
+      '.RrrrRrrrRrrrRrrrRrrrR',
+      '.RrrRrrrRrrrRrrrRrrrrR',
+      '.RrrrrrRrrrRrrrRrrrrrR',
+      '.RrrrrRrrrRrrrRrrrRrrR',
+      '.RrrrRrrrRrrrRrrrRrrrR',
+      '.RrrRrrrRrrrRrrrRrrrrR',
+      '.RrrrrrRrrrRrrrRrrrrrR',
+      '..RrrrRrrrRrrrRrrrrrR',
+      '..RrrRrrrRrrrRrrrRrrR',
+      '..RrrrrrRrrrRrrrRrrrR',
+      '..RrrrrRrrrRrrrRrrrrR',
+      '..RrrrRrrrRrrrRrrrrrR',
+      '..RRRRRRRRRRRRRRRRRRR',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr',
+      '.........Rrrrr']],
+  // FIG-END
+  };
+  function sprite([ox,oy,rows]){
+    const c=mk(W,H), g=c.getContext('2d');
+    rows.forEach((r,y)=>{for(let x=0;x<r.length;x++) if(r[x]!=='.') px(g,PAL[r[x]],ox+x,oy+y);});
+    const d=g.getImageData(0,0,W,H).data, on=(x,y)=>x>=0&&y>=0&&x<W&&y<H&&d[(y*W+x)*4+3];
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++)
+      if(!on(x,y)&&(on(x-1,y)||on(x+1,y)||on(x,y-1)||on(x,y+1))) px(g,'#0b0712',x,y);
+    return c;
+  }
+  const head=sprite(FIG.head), body=sprite(FIG.body), hand=sprite(FIG.hand), chair=sprite(FIG.chair);
+  // the monitor's light catches the right-hand edge of the figure, the window
+  // a fainter left one
   function rimOf(src){
-    const c=mk(W,H), g=c.getContext('2d'), d=src.getContext('2d').getImageData(0,0,W,H).data;
-    for(let y=0;y<H;y++) for(let x=W-1;x>=0;x--) if(d[(y*W+x)*4+3]){px(g,'#7fe9ff',x,y);break;}
+    const c=mk(W,H), g=c.getContext('2d'), d=src.getContext('2d').getImageData(0,0,W,H).data, on=(x,y)=>d[(y*W+x)*4+3];
+    for(let y=0;y<H;y++){
+      for(let x=W-1;x>=0;x--) if(on(x,y)){px(g,'#7fe9ff',x,y);break;}
+      for(let x=0;x<W;x++) if(on(x,y)){px(g,'rgba(160,130,235,0.55)',x,y);break;}
+    }
     return c;
   }
   const headRim=rimOf(head), bodyRim=rimOf(body);
-  // the arm reaching for the keyboard; the hand lifts while keys are being typed
-  function arm(lift){
-    for(let t=0;t<14;t++){const x=76+t, y=65+Math.round(t*3/13)-(t>9?lift:0); px(ctx,'#120a18',x,y-1,1,6); px(ctx,'#2a2238',x,y,1,4); px(ctx,'#3d3360',x,y,1,1);}
-    const hy=67-lift; px(ctx,'#120a18',88,hy-1,6,5); px(ctx,'#ddb5a1',89,hy,4,3); px(ctx,'#c8a08e',89,hy+2,4,1);
-  }
   // the screen mirrors the log: one row per printed line, colour = the tag
   function screen(){
     const lines=[{p:1,len:cmdEl.textContent.length}];
@@ -4693,12 +4800,12 @@ const newsDesk=(()=>{
       ctx.fillStyle='rgba(255,180,100,'+(0.075*(1-f*0.75)).toFixed(3)+')'; ctx.fillRect(xl,y,xr-xl,1);}
     ctx.fillStyle='rgba(255,190,120,0.14)'; ctx.fillRect(126,DESK,34,2);
     ctx.globalCompositeOperation='source-over';
-    // the guide: a slow nod now and then while idle, never while typing
+    // the figure: a slow nod now and then while idle, never while typing
     if(!REDUCE_MOTION&&!typing&&now>nextNod){nodUntil=now+500;nextNod=now+5000+rnd()*4000;}
     const nod=now<nodUntil?1:0;
     ctx.drawImage(body,0,0); ctx.drawImage(head,0,nod);
     ctx.globalAlpha=typing?0.45+rnd()*0.3:0.35; ctx.drawImage(bodyRim,0,0); ctx.drawImage(headRim,0,nod); ctx.globalAlpha=1;
-    arm(typing?frame%2:0);
+    ctx.drawImage(hand,0,typing?-(frame%2):0);
     ctx.drawImage(chair,0,0);
   }
   let raf=0,last=0;
