@@ -233,6 +233,51 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 .r-card h3{font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:10px;line-height:1.25}
 .r-card p{color:var(--muted);font-size:14px}
 
+/* NEWS — pixel desk on the left, a typed terminal log on the right */
+.news-desk{display:grid;grid-template-columns:minmax(0,480px) minmax(0,1fr);gap:clamp(20px,3vw,36px);align-items:start}
+.nd-scene{position:sticky;top:88px;display:flex;justify-content:center;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#110818;cursor:pointer}
+#nd-canvas{display:block;width:320px;height:240px;image-rendering:pixelated;image-rendering:crisp-edges}
+.nd-term{border:1px solid var(--line);border-radius:14px;background:var(--bg2);overflow:hidden;font-family:var(--mono)}
+.nd-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.06em;color:var(--dim)}
+.nd-bar i{width:8px;height:8px;border-radius:50%;background:var(--magenta)}
+.nd-bar i:nth-child(2){background:var(--amber)}
+.nd-bar i:nth-child(3){background:var(--lime)}
+.nd-bar span{margin-left:8px}
+.nd-filters{display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 0}
+.nd-f{font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+.nd-f:hover{color:var(--text);border-color:var(--line2)}
+.nd-f[aria-pressed="true"]{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+.nd-body{padding:14px 16px 16px;font-size:13.5px;line-height:1.6}
+.nd-prompt{color:var(--text);min-height:1.6em}
+.nd-ps{color:var(--lime)}
+.nd-log{list-style:none;margin:8px 0 6px}
+.nd-item{display:grid;grid-template-columns:62px 74px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px dashed rgba(255,150,200,0.08)}
+.nd-item.nd-pending{visibility:hidden}
+.nd-item.nd-out{display:none}
+.nd-date{color:var(--dim)}
+.nd-tag{font-size:10.5px;letter-spacing:.08em;padding-top:2px}
+.nd-item[data-type="paper"] .nd-tag{color:var(--cyan)}
+.nd-item[data-type="preprint"] .nd-tag{color:#9fdcff}
+.nd-item[data-type="talk"] .nd-tag{color:var(--violet)}
+.nd-item[data-type="project"] .nd-tag{color:var(--lime)}
+.nd-item[data-type="story"] .nd-tag,.nd-item[data-type="blog"] .nd-tag{color:var(--magenta)}
+.nd-item[data-type="honor"] .nd-tag{color:var(--amber)}
+.nd-text{color:var(--text);text-decoration:none}
+a.nd-text:hover,a.nd-text:focus-visible{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+/* untyped characters keep their place, so lines never reflow while typing */
+.nd-rest{color:transparent}
+/* zero-width caret: the block overhangs instead of pushing the text */
+.nd-caret{position:relative;display:inline-block;width:0;height:1.1em;vertical-align:-.2em}
+.nd-caret::after{content:'';position:absolute;left:1px;top:0;width:.55em;height:100%;background:var(--accent);animation:nd-blink 1s steps(1) infinite}
+@keyframes nd-blink{50%{opacity:0}}
+@media(max-width:860px){
+  .news-desk{grid-template-columns:1fr}
+  .nd-scene{position:relative;top:auto}
+  .nd-item{grid-template-columns:auto 1fr;gap:2px 10px}
+  .nd-item .nd-text{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){.nd-caret::after{animation:none}}
+
 /* PAPERS */
 .chart-wrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px 16px;margin-bottom:38px}
 .chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;flex-wrap:wrap;gap:8px}
@@ -1041,7 +1086,8 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
     <a class="brand" href="#"><b>Y</b>uxuan Cai</a>
     <div class="topnav">
       <a href="#about">About</a>
-      <a href="#papers">Papers</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
       <a href="#projects">Projects</a>
       <a href="#awards">Awards</a>
       <a href="#blog">Blog</a>
@@ -1056,7 +1102,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
     <p class="hero-tag">Teaching machines to <em>sense</em> the city.</p>
     <p class="hero-sub">Urban informatics &amp; human-centered AI · vision-language models for urban perception · LLM agent pathology and multi-agent deliberation · interpretability for planning.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#papers">View research →</a>
+      <a class="btn btn-primary" href="#publications">View research →</a>
       <a class="btn" href="Yuxuan_Cai_CV_2026-03.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a>
       <a class="btn" href="mailto:yuxuanc@unc.edu">Email</a>
     </div>
@@ -1071,7 +1117,8 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
     <a class="brand" href="#" onclick="location.hash='';return false"><b>Y</b>uxuan Cai</a>
     <nav class="section-tabs" aria-label="Sections">
       <button class="s-tab" data-page="about"    onclick="location.hash='about'">About</button>
-      <button class="s-tab" data-page="papers"   onclick="location.hash='papers'">Papers</button>
+      <button class="s-tab" data-page="news"     onclick="location.hash='news'">News</button>
+      <button class="s-tab" data-page="publications" onclick="location.hash='publications'">Publications</button>
       <button class="s-tab" data-page="projects" onclick="location.hash='projects'">Projects</button>
       <button class="s-tab" data-page="awards"   onclick="location.hash='awards'">Awards</button>
       <button class="s-tab" data-page="blog"     onclick="location.hash='blog'">Blog</button>
@@ -1108,9 +1155,53 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
       <div class="page-footer"><div class="pf-left">© <span class="yr">2026</span> Yuxuan Cai · UNC Chapel Hill</div><div class="pf-right"><a href="https://scholar.google.com/citations?user=V1_-l2IAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Scholar ↗</a></div></div>
     </section>
 
-    <!-- PAPERS -->
-    <section class="page" id="page-papers">
-      <div class="s-head"><div class="eyebrow">01 · Publications</div><h2 class="s-title reveal" tabindex="-1">Selected <em>papers</em></h2></div>
+    <!-- NEWS — the night guide types the log; the list is plain HTML so it reads without JS -->
+    <section class="page" id="page-news">
+      <div class="s-head"><div class="eyebrow">01 · News</div><h2 class="s-title reveal" tabindex="-1">Latest <em>news</em></h2></div>
+      <div class="news-desk reveal">
+        <div class="nd-scene" title="Click to skip the typing">
+          <canvas id="nd-canvas" width="160" height="120" role="img" aria-label="Pixel illustration: the night guide typing on a laptop at a desk, the city lit up in the window behind"></canvas>
+        </div>
+        <div class="nd-term">
+          <div class="nd-bar" aria-hidden="true"><i></i><i></i><i></i><span>~/news — updates.log</span></div>
+          <div class="nd-filters" role="group" aria-label="Filter news">
+            <button class="nd-f" data-group="all" aria-pressed="true">All</button>
+            <button class="nd-f" data-group="papers" data-grep='-E "PAPER|PREPRINT"' aria-pressed="false">Papers</button>
+            <button class="nd-f" data-group="talks" data-grep="TALK" aria-pressed="false">Talks</button>
+            <button class="nd-f" data-group="projects" data-grep='-E "PROJECT|STORY"' aria-pressed="false">Projects</button>
+            <button class="nd-f" data-group="blog" data-grep="BLOG" aria-pressed="false">Blog</button>
+            <button class="nd-f" data-group="honors" data-grep="HONOR" aria-pressed="false">Honors</button>
+          </div>
+          <div class="nd-body">
+            <div class="nd-prompt" aria-hidden="true"><span class="nd-ps">yuxuan@unc:~/news$</span> <span id="nd-cmd"></span></div>
+            <ol class="nd-log" id="nd-log">
+              <li class="nd-item" data-type="project" data-group="projects"><time class="nd-date" datetime="2026-09">2026·09</time><span class="nd-tag">PROJECT</span><a class="nd-text" href="projects/ai-for-planning.html">AI for Planning, a course and online textbook: project update</a></li>
+              <li class="nd-item" data-type="story" data-group="projects"><time class="nd-date" datetime="2026-09">2026·09</time><span class="nd-tag">STORY</span><a class="nd-text" href="projects/pm25-mental-health.html">PM2.5 and mental health, retold as an illustrated research story you can walk through</a></li>
+              <li class="nd-item" data-type="talk" data-group="talks"><time class="nd-date" datetime="2026">2026</time><span class="nd-tag">TALK</span><a class="nd-text" href="projects/vlm-mechanistic.html">What do vision-language models know about urban perception? A mechanistic investigation, at the ACSP 66th Annual Conference</a></li>
+              <li class="nd-item" data-type="preprint" data-group="papers"><time class="nd-date" datetime="2026-07">2026·07</time><span class="nd-tag">PREPRINT</span><a class="nd-text" href="projects/llm-urban-publics.html">Can large language models represent urban publics? Now on arXiv</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2026-06">2026·06</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/bikeshare-routes.html">Desirable bikeshare routes and micro-level street environments, in Transportation Research Part A</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2026-01">2026·01</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/vancouver-urban-nature-vitality.html">Urban nature and urban vitality in Vancouver, from social media and GPS data, in Land Use Policy</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-11">2025·11</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/gis-llm-crime.html">GIS, LLMs and media narratives for urban crime analysis, in PLOS ONE</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-11">2025·11</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/pm25-mental-health.html">Long-term PM2.5 exposure and mental health disparities in the All of Us Research Program, in Environmental Research</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-10">2025·10</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/greenery-inequalities-ny-london.html">Greenery inequalities in New York and London, in Urban Forestry &amp; Urban Greening</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-08">2025·08</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/urban-heat-island-nyc.html">Urban scene characteristics and the heat island in NYC, read with interpretable ML, in Urban Climate</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-08">2025·08</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/indoor-air-voc-plants.html">Potted plants and ML models for indoor VOC mitigation, in Urban Climate</a></li>
+              <li class="nd-item" data-type="blog" data-group="blog"><time class="nd-date" datetime="2025-07">2025·07</time><span class="nd-tag">BLOG</span><a class="nd-text" href="blog/nyc-heat-island.html">New post: urban scene types and heat-island risk in NYC</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-07">2025·07</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/perception-vs-environment.html">Subjective perception or the physical environment? Public-area visits across COVID-19 stages, in Urban Forestry &amp; Urban Greening</a></li>
+              <li class="nd-item" data-type="paper" data-group="papers"><time class="nd-date" datetime="2025-04">2025·04</time><span class="nd-tag">PAPER</span><a class="nd-text" href="projects/residential-segregation-las-vegas.html">Residential segregation in Las Vegas with ML, SHAP and deep learning, in Land</a></li>
+              <li class="nd-item" data-type="honor" data-group="honors"><time class="nd-date" datetime="2025">2025</time><span class="nd-tag">HONOR</span><span class="nd-text">Nominated for the MACSS Outstanding Thesis Award, University of Chicago</span></li>
+              <li class="nd-item" data-type="talk" data-group="talks"><time class="nd-date" datetime="2025-01">2025·01</time><span class="nd-tag">TALK</span><span class="nd-text">Nonlinear impact of built environments on bike-share route discrepancies, at the TRB 2025 Annual Meeting</span></li>
+            </ol>
+            <div class="nd-prompt nd-prompt-end" aria-hidden="true"><span class="nd-ps">yuxuan@unc:~/news$</span> </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer"><div class="pf-left">© <span class="yr">2026</span> Yuxuan Cai</div><div class="pf-right"><a href="https://scholar.google.com/citations?user=V1_-l2IAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></div></div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="page" id="page-publications">
+      <div class="s-head"><div class="eyebrow">02 · Publications</div><h2 class="s-title reveal" tabindex="-1">Selected <em>publications</em></h2></div>
 
       <div class="chart-wrap reveal">
         <div class="chart-head">
@@ -1159,7 +1250,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- PROJECTS -->
     <section class="page" id="page-projects">
-      <div class="s-head"><div class="eyebrow">02 · Projects</div><h2 class="s-title reveal" tabindex="-1">Research &amp; <em>projects</em></h2></div>
+      <div class="s-head"><div class="eyebrow">03 · Projects</div><h2 class="s-title reveal" tabindex="-1">Research &amp; <em>projects</em></h2></div>
 
       <!-- Research directions (formerly its own page; #research still lands here) -->
       <div class="globe-panel reveal">
@@ -1301,7 +1392,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- AWARDS -->
     <section class="page" id="page-awards">
-      <div class="s-head"><div class="eyebrow">03 · Recognition</div><h2 class="s-title reveal" tabindex="-1">Awards &amp; <em>honors</em></h2></div>
+      <div class="s-head"><div class="eyebrow">04 · Recognition</div><h2 class="s-title reveal" tabindex="-1">Awards &amp; <em>honors</em></h2></div>
       <div class="aw-cat reveal">
         <div class="aw-cat-h aw-c1"><span class="aw-ico"><svg shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g><path d="m30.48 23.62 -1.53 0 0 1.52 3.05 0 0 -6.09 -1.52 0 0 4.57z" fill="currentColor" stroke-width="1"></path><path d="M30.48 14.47H32V16h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="m0 0.76 0 24.38 15.24 0 0 -1.52 -13.72 0 0 -21.34 28.96 0 0 9.15 1.52 0L32 0.76l-32 0z" fill="currentColor" stroke-width="1"></path><path d="M28.95 16h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M28.95 12.95h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="m27.43 20.57 -3.05 0 0 1.52 -1.52 0 0 1.53 -1.53 0 0 -1.53 -1.52 0 0 -1.52 -3.05 0 0 -3.05 -1.52 0 0 4.57 1.52 0 0 9.15 3.05 0 0 -1.53 1.52 0 0 -1.52 1.53 0 0 1.52 1.52 0 0 1.53 3.05 0 0 -9.15 1.52 0 0 -4.57 -1.52 0 0 3.05z" fill="currentColor" stroke-width="1"></path><path d="m28.95 6.86 0 -3.05 -4.57 0 0 1.52 3.05 0 0 1.53 1.52 0z" fill="currentColor" stroke-width="1"></path><path d="M25.9 12.95h1.53v4.57H25.9Z" fill="currentColor" stroke-width="1"></path><path d="M24.38 17.52h1.52v1.53h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M24.38 11.43h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="m27.43 9.9 0 3.05 1.52 0 0 -4.57 -4.57 0 0 1.52 3.05 0z" fill="currentColor" stroke-width="1"></path><path d="M19.81 19.05h4.57v1.52h-4.57Z" fill="currentColor" stroke-width="1"></path><path d="M22.86 6.86h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M21.33 5.33h1.53v1.53h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M19.81 9.9h4.57v1.53h-4.57Z" fill="currentColor" stroke-width="1"></path><path d="M19.81 6.86h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M18.29 17.52h1.52v1.53h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M18.29 11.43h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M16.76 12.95h1.53v4.57h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="m16.76 9.9 3.05 0 0 -1.52 -4.57 0 0 4.57 1.52 0 0 -3.05z" fill="currentColor" stroke-width="1"></path><path d="M13.71 16h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M13.71 12.95h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M12.19 14.47h1.52V16h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="m19.81 5.33 0 -1.52 -16.76 0 0 18.28 10.66 0 0 -1.52 -9.14 0 0 -15.24 15.24 0z" fill="currentColor" stroke-width="1"></path><path d="M6.1 12.95h4.57v1.52H6.1Z" fill="currentColor" stroke-width="1"></path><path d="M6.1 6.86h4.57v4.57H6.1Z" fill="currentColor" stroke-width="1"></path><path d="M6.1 16h4.57v1.52H6.1Z" fill="currentColor" stroke-width="1"></path></g></svg></span>Fellowships &amp; Scholarships</div>
         <div class="aw-grid">
@@ -1335,7 +1426,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- CONTACT -->
     <section class="page" id="page-contact">
-      <div class="s-head"><div class="eyebrow">05 · Contact</div></div>
+      <div class="s-head"><div class="eyebrow">06 · Contact</div></div>
       <div class="contact-grid">
         <div>
           <h2 class="s-title reveal" tabindex="-1">Open to<br><em>collaboration</em></h2>
@@ -1384,7 +1475,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- BLOG & TUTORIALS -->
     <section class="page" id="page-blog">
-      <div class="s-head"><div class="eyebrow">04 · Writing</div><h2 class="s-title reveal" tabindex="-1">Blog &amp; <em>tutorials</em></h2></div>
+      <div class="s-head"><div class="eyebrow">05 · Writing</div><h2 class="s-title reveal" tabindex="-1">Blog &amp; <em>tutorials</em></h2></div>
       <p class="lede reveal" style="font-size:clamp(16px,2vw,21px)">Notes, ideas, and hands-on tutorials on urban AI, urban perception, and computational methods — sharing work in progress and what I learn along the way. Newest first.</p>
       <div class="proj-h reveal">Blog</div>
       <div class="post-list reveal">
@@ -4375,6 +4466,267 @@ function startResearchGlobe(){ if(rGlobe){ fitResearchGlobe(); if(!REDUCE_MOTION
 function stopResearchGlobe(){ if(rGlobe) rGlobe.pauseAnimation(); }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) stopResearchGlobe(); else if(document.querySelector('#page-projects.active')) startResearchGlobe(); });
 
+// ── NEWS DESK ──
+// The night guide from the walk works late, seen from behind; the log beside
+// the scene is what is on the monitor. The first visit types the newest entries
+// and streams the rest, the hand moves only while text is being typed, and each
+// printed paper lands on the stack on the desk. A click or a key skips the typing.
+const newsDesk=(()=>{
+  const log=document.getElementById('nd-log'), cv=document.getElementById('nd-canvas');
+  if(!log||!cv||!cv.getContext) return {start(){},stop(){}};
+  const cmdEl=document.getElementById('nd-cmd'), endPrompt=document.querySelector('.nd-prompt-end');
+  const scene=cv.parentElement, term=document.querySelector('.nd-term');
+  const filters=[...document.querySelectorAll('.nd-f')];
+  // untyped characters stay in the DOM (transparent), so screen readers and
+  // layout always see the whole line
+  const items=[...log.querySelectorAll('.nd-item')].map(li=>{
+    const el=li.querySelector('.nd-text'), text=el.textContent;
+    const done=document.createElement('span'), rest=document.createElement('span');
+    rest.className='nd-rest'; rest.textContent=text; el.textContent=''; el.append(done,rest);
+    li.classList.add('nd-pending');
+    return {li,done,rest,text,type:li.dataset.type,printed:false,paper:/^(paper|preprint)$/.test(li.dataset.type)};
+  });
+  const caret=document.createElement('span'); caret.className='nd-caret'; caret.setAttribute('aria-hidden','true');
+  const ALL_CMD='tail -n '+items.length+' updates.log';
+  let run=0, typing=false, played=false, active=false;
+
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const show=it=>{it.done.textContent=it.text;it.rest.textContent='';it.li.classList.remove('nd-pending');it.printed=true;};
+  async function type(doneEl,restEl,text,ms,id){
+    for(let i=1;i<=text.length;i++){
+      if(id!==run) return false;
+      doneEl.textContent=text.slice(0,i); if(restEl) restEl.textContent=text.slice(i);
+      await wait(ms*(0.5+Math.random()));
+    }
+    return id===run;
+  }
+  function settle(){typing=false;endPrompt.append(caret);}
+  function finish(){
+    if(!typing) return;
+    run++; items.forEach(it=>{if(!it.printed||it.li.classList.contains('nd-pending'))show(it);});
+    settle();
+  }
+  async function print(cmd,list,typed){
+    const id=++run; typing=true;
+    cmdEl.textContent=''; cmdEl.after(caret);
+    if(!await type(cmdEl,null,cmd,30,id)) return;
+    await wait(260);
+    for(let n=0;n<list.length;n++){
+      if(id!==run) return;
+      const it=list[n];
+      if(n<typed){
+        it.done.textContent=''; it.rest.textContent=it.text; it.li.classList.remove('nd-pending'); it.done.after(caret);
+        if(!await type(it.done,it.rest,it.text,13,id)) return;
+        it.printed=true; await wait(180);
+      }else{ show(it); await wait(70); }
+    }
+    if(id===run) settle();
+  }
+  function filter(btn){
+    finish();
+    filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+    const g=btn.dataset.group, list=items.filter(it=>g==='all'||it.li.dataset.group===g);
+    items.forEach(it=>it.li.classList.toggle('nd-out',!list.includes(it)));
+    const cmd=g==='all'?ALL_CMD:'grep '+btn.dataset.grep+' updates.log';
+    if(REDUCE_MOTION){cmdEl.textContent=cmd;return;}
+    list.forEach(it=>it.li.classList.add('nd-pending'));
+    print(cmd,list,0);
+  }
+  filters.forEach(b=>b.addEventListener('click',()=>filter(b)));
+  scene.addEventListener('click',finish);
+  term.addEventListener('click',e=>{if(!e.target.closest('a,button'))finish();});
+  document.addEventListener('keydown',e=>{
+    if(active&&typing&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&!['Tab','Shift','Control','Alt','Meta'].includes(e.key))finish();
+  });
+
+  // ── the scene: 160×120 art pixels, scaled by whole numbers. The wall and
+  // desk are baked wider (BW) so the room extends sideways to fill the frame.
+  // The guide is seen from behind, so the screen faces us and mirrors the log ──
+  const W=160,H=120,BW=240,OX=40,DESK=70, ctx=cv.getContext('2d');
+  let VW=W;
+  const rnd=(s=>()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;})(20261103);
+  const mk=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
+  const px=(g,c,x,y,w=1,h=1)=>{g.fillStyle=c;g.fillRect(x,y,w,h);};
+  const WIN={x:8,y:8,w:40,h:36}, MON={x:84,y:24,w:46,h:36}, SCR={x:87,y:27,w:40,h:28};
+  const TAGC={paper:'#3ee6ff',preprint:'#9fdcff',talk:'#b07bff',project:'#5cffb0',story:'#ff5ca0',blog:'#ff5ca0',honor:'#ffb14d'};
+  const lights=[];
+  // back layer: wall, window onto the city, a street map, the desk and the
+  // monitor, lamp and mug that stand on it
+  const back=mk(BW,H);(()=>{const g=back.getContext('2d');
+    px(g,'#170d22',0,0,BW,H);
+    for(let x=4;x<BW;x+=14) px(g,'#1b1028',x,0,1,DESK);
+    px(g,'#3a2236',0,DESK,BW,6); px(g,'#57324a',0,DESK,BW,1);
+    px(g,'#21111d',0,DESK+6,BW,22); px(g,'#2c1626',0,DESK+6,BW,1);
+    px(g,'#0f0817',0,DESK+28,BW,H-DESK-28);
+    g.translate(OX,0);
+    for(const x of [-38,4,118,160]){px(g,'#2c1626',x,DESK+15,40,1);px(g,'#57324a',x+17,DESK+11,6,1);}
+    px(g,'#2b1d3d',WIN.x-2,WIN.y-2,WIN.w+4,WIN.h+4);
+    const bands=['#150c2b','#1f1038','#2c1344','#40184d','#5a1f55'], bh=WIN.h/bands.length;
+    for(let y=0;y<WIN.h;y++){const b=Math.floor(y/bh), f=y/bh-b;
+      for(let x=0;x<WIN.w;x++){const dith=f>0.65&&(x+y)%2===0&&b<bands.length-1; px(g,bands[dith?b+1:b],WIN.x+x,WIN.y+y);}}
+    for(let i=0;i<9;i++) px(g,i%3?'#cdb8ef':'#ffffff',WIN.x+Math.floor(rnd()*WIN.w),WIN.y+Math.floor(rnd()*WIN.h*0.4));
+    for(let dy=-3;dy<=3;dy++)for(let dx=-3;dx<=3;dx++){if(dx*dx+dy*dy<=9)px(g,dx>1?'#f2c2d8':'#ffe3ef',WIN.x+30+dx,WIN.y+8+dy);}
+    const mullX=WIN.x+20, mullY=WIN.y+17;
+    for(const [col,hmin,hmax,lit] of [['#26153b',12,24,false],['#100a1c',6,17,true]]){
+      let x=WIN.x;
+      while(x<WIN.x+WIN.w){
+        const bw=4+Math.floor(rnd()*5), bht=hmin+Math.floor(rnd()*(hmax-hmin)), top=WIN.y+WIN.h-bht, w=Math.min(bw,WIN.x+WIN.w-x);
+        px(g,col,x,top,w,bht);
+        if(lit) for(let wy=top+2;wy<WIN.y+WIN.h-1;wy+=2) for(let wx=x+1;wx<x+w-1;wx+=2)
+          if(wx!==mullX&&wy!==mullY) lights.push({x:wx,y:wy,on:rnd()<0.35,c:['#ffcf7a','#ff5ca0','#3ee6ff','#ffcf7a'][Math.floor(rnd()*4)]});
+        x+=bw+(rnd()<0.3?1:0);
+      }
+    }
+    px(g,'#2b1d3d',mullX,WIN.y,1,WIN.h); px(g,'#2b1d3d',WIN.x,mullY,WIN.w,1);
+    px(g,'#3a2852',WIN.x-4,WIN.y+WIN.h+2,WIN.w+8,2);
+    // a plant on the sill
+    px(g,'#83405a',33,39,10,2); px(g,'#6a3247',34,41,8,5); px(g,'#552839',40,41,2,5);
+    for(const [x,y,c] of [[37,37,0],[35,35,1],[38,33,0],[36,31,0],[40,35,1],[33,33,0],[41,32,1],[39,30,0],[34,37,1],[42,37,0],[37,34,1],[32,36,0]])
+      px(g,c?'#2a8a5a':'#3fbf7f',x,y,2,2);
+    // a street map pinned to the wall
+    px(g,'#2b1d3d',132,6,24,22); px(g,'#0e0a1a',134,8,20,18);
+    for(const y of [13,20]) px(g,'#1f5f70',134,y,20,1);
+    for(const x of [139,148]) px(g,'#1f5f70',x,8,1,18);
+    px(g,'#3ee6ff',139,13,1,7); px(g,'#3ee6ff',139,20,9,1); px(g,'#3ee6ff',148,20,1,6);
+    for(const [x,y] of [[139,13],[148,20]]) px(g,'#ff5ca0',x-1,y-1,3,3);
+    px(g,'#ff4d9d',143,5,3,2);
+    // monitor, stand and keyboard
+    px(g,'#120a18',MON.x,MON.y,MON.w,MON.h); px(g,'#2a2740',MON.x+1,MON.y+1,MON.w-2,MON.h-2);
+    px(g,'#3b3858',MON.x+1,MON.y+1,MON.w-2,1); px(g,'#1c1a2c',MON.x+1,MON.y+MON.h-2,MON.w-2,1);
+    px(g,'#0b0f1f',SCR.x,SCR.y,SCR.w,SCR.h);
+    for(let y=SCR.y+1;y<SCR.y+SCR.h;y+=2) px(g,'#0d1226',SCR.x,y,SCR.w,1);
+    px(g,'#ff4d9d',MON.x+MON.w/2-1,MON.y+MON.h-3,2,1);
+    px(g,'#2a2740',104,MON.y+MON.h,6,8); px(g,'#1c1a2c',108,MON.y+MON.h,2,8);
+    px(g,'#2a2740',98,68,18,4); px(g,'#3b3858',98,68,18,1);
+    px(g,'#2a2740',88,70,30,2); for(let x=89;x<117;x+=2) px(g,'#4a4668',x,70,1,1);
+    // lamp
+    px(g,'#2a2238',146,70,12,2); px(g,'#3d3360',152,46,2,24);
+    for(let i=0;i<8;i++) px(g,'#3d3360',151-i,45-Math.floor(i/2),1,1);
+    px(g,'#c47a2c',138,38,7,1); px(g,'#ffb14d',137,39,9,2); px(g,'#ffb14d',136,41,11,2); px(g,'#ffe6b8',136,43,11,1);
+    // mug
+    px(g,'#e8dff0',122,65,6,7); px(g,'#3a2a40',123,65,4,1); px(g,'#ff5ca0',122,68,6,1);
+    px(g,'#e8dff0',128,66,2,1); px(g,'#e8dff0',129,67,1,2); px(g,'#e8dff0',128,69,2,1);
+  })();
+
+  // the guide from behind: head (hat, hair, ears) and body (coat, scarf) are
+  // separate so the head can nod while the hands rest
+  const head=mk(W,H), body=mk(W,H), chair=mk(W,H);
+  (()=>{const g=head.getContext('2d');
+    px(g,'#120a18',52,33,13,1); px(g,'#120a18',51,34,1,1); px(g,'#120a18',65,34,1,1);
+    px(g,'#120a18',50,35,1,12); px(g,'#120a18',66,35,1,12);
+    px(g,'#1b1230',52,34,13,1); px(g,'#1b1230',51,35,15,12);
+    px(g,'#3b2f60',52,35,1,9); px(g,'#3b2f60',53,34,3,1); px(g,'#110a1c',64,35,1,12);
+    px(g,'#6b2748',51,44,15,3); px(g,'#93405f',51,44,15,1);
+    px(g,'#1b1230',45,47,27,1); px(g,'#3b2f60',45,47,6,1); px(g,'#120a18',44,48,29,1); px(g,'#120a18',44,47,1,1); px(g,'#120a18',72,47,1,1);
+    px(g,'#120a18',47,50,1,4); px(g,'#ddb5a1',48,50,1,4); px(g,'#c8a08e',48,53,1,1);
+    px(g,'#120a18',69,50,1,4); px(g,'#c8a08e',68,50,1,4);
+    px(g,'#1b1a19',49,49,19,7); px(g,'#1b1a19',50,56,17,1); px(g,'#1b1a19',52,57,13,1);
+    for(const x of [54,56,58,60,62]) px(g,'#1b1a19',x,58,1,1);
+    for(const [x,y,h] of [[51,50,4],[54,49,6],[57,50,5],[60,49,6],[63,50,5],[66,50,3]]) px(g,'#37332f',x,y,1,h);
+  })();
+  (()=>{const g=body.getContext('2d');
+    px(g,'#c8a08e',54,57,9,4); px(g,'#a98270',61,57,2,4);
+    const span=y=>y<=62?[47,69]:y===63?[44,72]:y===64?[42,74]:y===65?[40,76]:y<72?[39,77]:[38,78];
+    for(let y=62;y<H;y++){const [a,b]=span(y);
+      px(g,'#120a18',a-1,y,b-a+3,1); px(g,'#2a2238',a,y,b-a+1,1);
+      px(g,'#3d3360',a,y,3,1); px(g,'#1b1526',b-1,y,2,1);}
+    px(g,'#120a18',47,61,23,1); px(g,'#3d3360',44,63,8,1);
+    px(g,'#1b1526',58,70,1,H-70);
+    px(g,'#6e2d4b',51,59,15,1); px(g,'#6e2d4b',49,60,19,4); px(g,'#944068',49,60,19,1); px(g,'#4a1c34',49,63,19,1);
+    px(g,'#6e2d4b',49,64,5,14); px(g,'#944068',49,64,1,14); px(g,'#4a1c34',53,64,1,14);
+    for(const x of [49,51,53]) px(g,'#4a1c34',x,78,1,1);
+  })();
+  (()=>{const g=chair.getContext('2d');
+    px(g,'#120a18',45,85,27,1); px(g,'#120a18',43,86,31,1); px(g,'#120a18',41,87,35,H-87);
+    px(g,'#2b1d3d',45,86,27,1); px(g,'#2b1d3d',43,87,31,1); px(g,'#2b1d3d',42,88,33,H-88);
+    px(g,'#3a2852',45,86,27,1); px(g,'#3a2852',42,88,1,H-88);
+    for(const x of [52,64]) px(g,'#1f1530',x,90,1,H-90);
+    px(g,'#1f1530',43,101,32,1);
+  })();
+  // the monitor's light catches the right-hand edge of the figure
+  function rimOf(src){
+    const c=mk(W,H), g=c.getContext('2d'), d=src.getContext('2d').getImageData(0,0,W,H).data;
+    for(let y=0;y<H;y++) for(let x=W-1;x>=0;x--) if(d[(y*W+x)*4+3]){px(g,'#7fe9ff',x,y);break;}
+    return c;
+  }
+  const headRim=rimOf(head), bodyRim=rimOf(body);
+  // the arm reaching for the keyboard; the hand lifts while keys are being typed
+  function arm(lift){
+    for(let t=0;t<14;t++){const x=76+t, y=65+Math.round(t*3/13)-(t>9?lift:0); px(ctx,'#120a18',x,y-1,1,6); px(ctx,'#2a2238',x,y,1,4); px(ctx,'#3d3360',x,y,1,1);}
+    const hy=67-lift; px(ctx,'#120a18',88,hy-1,6,5); px(ctx,'#ddb5a1',89,hy,4,3); px(ctx,'#c8a08e',89,hy+2,4,1);
+  }
+  // the screen mirrors the log: one row per printed line, colour = the tag
+  function screen(){
+    const lines=[{p:1,len:cmdEl.textContent.length}];
+    let tail=lines[0];
+    for(const it of items){
+      if(it.li.classList.contains('nd-out')||it.li.classList.contains('nd-pending')) continue;
+      const l={c:TAGC[it.type],len:it.done.textContent.length}; lines.push(l); if(!it.printed) tail=l;
+    }
+    if(!typing){tail={p:1,len:0};lines.push(tail);}
+    lines.slice(-8).forEach((l,i)=>{
+      const y=SCR.y+3+i*3, x=SCR.x+2; let w, x0;
+      if(l.p){px(ctx,'#5cffb0',x,y,5,1); x0=x+7; w=Math.min(30,Math.ceil(l.len/2));}
+      else{px(ctx,'#6f5570',x,y,4,1); px(ctx,l.c,x+6,y,4,1); x0=x+12; w=Math.min(25,Math.ceil(l.len/4));}
+      for(let j=0;j<w;j++) if((j+i*3)%7!==6) px(ctx,'#e8dff0',x0+j,y);
+      if(l===tail&&(frame>>2)%2===0) px(ctx,'#ff4d9d',x0+w+1,y-1,2,2);
+    });
+  }
+  let frame=0, nodUntil=0, nextNod=5000;
+  function draw(now){
+    frame++;
+    ctx.setTransform(1,0,0,1,-Math.floor((BW-VW)/2),0);
+    ctx.drawImage(back,0,0);
+    ctx.translate(OX,0);
+    if(!REDUCE_MOTION&&rnd()<0.5){const l=lights[Math.floor(rnd()*lights.length)]; l.on=!l.on;}
+    lights.forEach(l=>{if(l.on)px(ctx,l.c,l.x,l.y);});
+    screen();
+    const n=items.filter(it=>it.printed&&it.paper).length;
+    for(let i=0;i<n;i++) px(ctx,i%2?'#d9cde4':'#efe7f4',12+(i*7)%3-1,DESK+1-i,17,1);
+    if(n) for(let i=0;i<3;i++) px(ctx,'#a998bb',15+(n*7)%3-1+i*4,DESK+1-n,3,1);
+    for(const p of [0,4,8]){const s=(Math.floor(frame/2)+p)%12; ctx.globalAlpha=0.5*(1-s/12); px(ctx,'#ffffff',124+((s>>2)+p)%3,63-s);}
+    ctx.globalAlpha=1;
+    ctx.globalCompositeOperation='lighter';
+    const glow=typing?0.07+rnd()*0.05:0.05;
+    ctx.fillStyle='rgba(110,225,255,'+glow.toFixed(3)+')'; ctx.fillRect(SCR.x-3,SCR.y-3,SCR.w+6,SCR.h+6); ctx.fillRect(84,DESK,48,3);
+    for(let y=45;y<DESK+2;y++){const f=(y-45)/(DESK+2-45), xl=Math.round(136-9*f), xr=Math.round(147+9*f);
+      ctx.fillStyle='rgba(255,180,100,'+(0.075*(1-f*0.75)).toFixed(3)+')'; ctx.fillRect(xl,y,xr-xl,1);}
+    ctx.fillStyle='rgba(255,190,120,0.14)'; ctx.fillRect(126,DESK,34,2);
+    ctx.globalCompositeOperation='source-over';
+    // the guide: a slow nod now and then while idle, never while typing
+    if(!REDUCE_MOTION&&!typing&&now>nextNod){nodUntil=now+500;nextNod=now+5000+rnd()*4000;}
+    const nod=now<nodUntil?1:0;
+    ctx.drawImage(body,0,0); ctx.drawImage(head,0,nod);
+    ctx.globalAlpha=typing?0.45+rnd()*0.3:0.35; ctx.drawImage(bodyRim,0,0); ctx.drawImage(headRim,0,nod); ctx.globalAlpha=1;
+    arm(typing?frame%2:0);
+    ctx.drawImage(chair,0,0);
+  }
+  let raf=0,last=0;
+  function tick(now){raf=requestAnimationFrame(tick); if(now-last<100) return; last=now; draw(now);}
+  function loopOn(){ if(REDUCE_MOTION){draw(0);return;} if(!raf&&!document.hidden) raf=requestAnimationFrame(tick); }
+  function loopOff(){cancelAnimationFrame(raf);raf=0;}
+  function fit(){
+    // a few pixels of crop are fine: the frame's border would otherwise cost a whole scale step
+    const box=scene.clientWidth, k=Math.max(1,Math.floor((box+8)/W));
+    VW=Math.min(BW,Math.ceil(box/k)); if(cv.width!==VW) cv.width=VW;
+    cv.style.width=VW*k+'px'; cv.style.height=H*k+'px';
+  }
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)loopOff();else if(active)loopOn();});
+  window.addEventListener('resize',()=>{if(active){fit();if(REDUCE_MOTION)draw(0);}});
+
+  function start(){
+    active=true; fit();
+    if(!played){
+      played=true;
+      if(REDUCE_MOTION){items.forEach(show);cmdEl.textContent=ALL_CMD;settle();}
+      else print(ALL_CMD,items,3);
+    }
+    loopOn();
+  }
+  function stop(){active=false;finish();loopOff();}
+  return {start,stop};
+})();
+
 // ── PUBLICATION CHART ──
 const PUBS=[{y:'2023',j:0,c:2},{y:'2024',j:3,c:0},{y:'2025',j:7,c:1},{y:'2026',j:2,c:1}];
 function drawChart(animate){
@@ -4424,7 +4776,7 @@ function drawChart(animate){
 }
 
 // ── NAVIGATION (hash-routed) ──
-const PAGES=['about','papers','projects','awards','blog','contact'];
+const PAGES=['about','news','publications','projects','awards','blog','contact'];
 let chartDrawn=false;
 function revealPage(id){
   if(!HAS_GSAP()||REDUCE_MOTION) return;
@@ -4440,7 +4792,8 @@ function showPage(id){
   const pg=document.getElementById('page-'+id); if(pg)pg.classList.add('active');
   document.querySelectorAll('.s-tab').forEach(t=>{const on=t.dataset.page===id;t.classList.toggle('active',on);t.setAttribute('aria-current',on?'page':'false');});
   if(window.cityStop) window.cityStop();
-  if(id==='papers'){ drawChart(!chartDrawn); chartDrawn=true; }
+  if(id==='publications'){ drawChart(!chartDrawn); chartDrawn=true; }
+  if(id==='news') newsDesk.start(); else newsDesk.stop();
   if(id==='projects'){ initResearchGlobe(); startResearchGlobe(); } else { stopResearchGlobe(); }
   if(id==='projects'){
     // Reset active tab button to research
@@ -4486,11 +4839,11 @@ function showCity(){
   document.getElementById('city-screen').style.display='block';
   if(window.cityVisible)window.cityVisible(true);
   if(window.cityStart) window.cityStart();
-  stopResearchGlobe();
+  stopResearchGlobe(); newsDesk.stop();
   window.scrollTo(0,0);
 }
-// Research was folded into the top of Projects; old #research links still land there
-const PAGE_ALIAS={research:'projects'};
+// Research was folded into the top of Projects; old #research links still land there, and #papers was renamed
+const PAGE_ALIAS={research:'projects',papers:'publications'};
 function route(){const h=location.hash.slice(1), id=PAGE_ALIAS[h]||h; if(PAGES.indexOf(id)>=0) showPage(id); else showCity();}
 window.addEventListener('hashchange',route);
 function openPage(id){location.hash=id;}
@@ -5529,7 +5882,7 @@ function runBootCeremony(onComplete) {
     return;
   }
 
-  // Only run loader on the homepage, skip on inner pages like #papers
+  // Only run loader on the homepage, skip on inner pages like #publications
   const isHomepage = !location.hash || location.hash === '#';
   if (!isHomepage) {
     overlay.style.display = 'none';
