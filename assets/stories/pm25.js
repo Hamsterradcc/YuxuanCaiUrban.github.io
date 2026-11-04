@@ -17,7 +17,7 @@ window.RESEARCH_STORY = {
     {
       id: 'cohort', chapter: 'The people', location: 'INSIDE / THE RESEARCH ROOM',
       title: 'Follow people.\nThen follow time.', subtitle: 'Two cohorts in the All of Us Research Program.',
-      background: '../assets/images/stories/pm25/observatory.png', position: '50% 50%',
+      background: '../assets/images/stories/pm25/observatory.webp', position: '50% 50%',
       speaker: 'RESEARCH NOTES', role: 'The study population',
       text: 'We begin with people who had no recorded diagnosis of the outcome at baseline, then follow their electronic health records. Anxiety and depression are studied in two separate cohorts that may overlap, so the two counts cannot be added together.',
       source: 'Main paper · §2.1 & §3.1; Supplement · Table S1',
@@ -27,7 +27,7 @@ window.RESEARCH_STORY = {
     {
       id: 'exposure', chapter: 'The exposure', location: 'AT THE DESK / MEASURING THE AIR',
       title: 'A place.\nA year. An estimate.', subtitle: 'How a vast atmosphere becomes a research variable.',
-      background: '../assets/images/stories/pm25/observatory.png', position: '20% 60%',
+      background: '../assets/images/stories/pm25/observatory.webp', position: '20% 60%',
       speaker: 'METHOD NOTES', role: 'Defining exposure',
       text: 'The map gives each participant an annual outdoor PM₂.₅ estimate for their baseline three-digit ZIP area. It comes from a fine grid, aggregated using area and population weights. This lets us study broad patterns, while leaving a person’s daily movements and indoor air outside the frame.',
       source: 'Main paper · p. 2, §2.2; Supplement · Tables S2–S3',
@@ -38,7 +38,7 @@ window.RESEARCH_STORY = {
     {
       id: 'results', chapter: 'The results', location: 'AT THE DESK / READING THE ESTIMATES',
       title: 'Two outcomes.\nA signal in both.', subtitle: 'Higher exposure was associated with a higher hazard of diagnosis.',
-      background: '../assets/images/stories/pm25/observatory.png', position: '65% 45%',
+      background: '../assets/images/stories/pm25/observatory.webp', position: '65% 45%',
       speaker: 'RESULT NOTES', role: 'The main comparison',
       text: 'Compare the highest-exposure quarter with the lowest. The adjusted hazard ratio is 1.10 for anxiety and 1.45 for depression. These numbers describe relative rates of new diagnoses over follow-up. They do not predict whether any one person will become ill.',
       source: 'Main paper · p. 3, §3.1; Supplement · Table S4',
@@ -52,7 +52,7 @@ window.RESEARCH_STORY = {
     {
       id: 'pattern', chapter: 'The pattern', location: 'AT THE WINDOW / LOOKING CLOSER',
       title: 'The pattern\nis not uniform.', subtitle: 'Anxiety and depression have different exposure–response patterns.',
-      background: '../assets/images/stories/pm25/observatory.png', position: '80% 35%',
+      background: '../assets/images/stories/pm25/observatory.webp', position: '80% 35%',
       speaker: 'RESULT NOTES', role: 'Beyond one number',
       text: 'Now move through the exposure distribution. For depression, associations appear in the second and third quartiles as well as the fourth. For anxiety, the clearest elevation is in the highest quartile. A single summary number cannot show the whole pattern.',
       source: 'Main paper · Figure 1 & §3.1; Supplement · Table S4',
@@ -74,7 +74,7 @@ window.RESEARCH_STORY = {
     {
       id: 'checks', chapter: 'The checks', location: 'THE ARCHIVE / TESTING THE CHOICES',
       title: 'Ask the finding\nto hold up.', subtitle: 'Open the supplement. Change an analytical choice.',
-      background: '../assets/images/stories/pm25/observatory.png', position: '15% 65%',
+      background: '../assets/images/stories/pm25/observatory.webp', position: '15% 65%',
       speaker: 'ARCHIVE NOTES', role: 'Sensitivity analyses',
       text: 'What if we combine the pollution grid differently? What if we focus on longer-term residents, or account for ozone too? The supplement tests these choices. Several results remain positive, but these checks cannot supply missing residential histories or make an observational study causal.',
       source: 'Supplement · Tables S2–S3, S7–S8; main paper · §3.1',
@@ -85,7 +85,7 @@ window.RESEARCH_STORY = {
     {
       id: 'limits', chapter: 'The gaps', location: 'THE RESEARCH ROOM / WHAT IS MISSING',
       title: 'Every study\nhas blind spots.', subtitle: 'The missing pieces matter to the interpretation.',
-      background: '../assets/images/stories/pm25/observatory.png', position: '25% 40%',
+      background: '../assets/images/stories/pm25/observatory.webp', position: '25% 40%',
       speaker: 'RESEARCH NOTES', role: 'The limits of the evidence',
       text: 'We cannot see every move, every exposure, or every untreated illness. Smoking, activity, diet, and occupation were not included. The associations warrant attention, while these missing pieces leave room for other explanations. A careful reading keeps both ideas in view.',
       source: 'Main paper · pp. 5–6; Supplement · Figure S2',
