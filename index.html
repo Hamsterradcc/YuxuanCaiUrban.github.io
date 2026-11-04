@@ -341,6 +341,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   .aw-grid{grid-template-columns:1fr}
   .topnav{display:none}
   .globe-legend{display:none}
+  .globe-panel{height:clamp(260px,40vh,360px)}
   .scroll-hint{display:none}
   .hero-content{top:auto;bottom:64px;transform:none;right:clamp(20px,5vw,72px)}
   .paper-row{grid-template-columns:46px 1fr;gap:6px 14px}
@@ -486,6 +487,8 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   background: rgba(255, 77, 157, 0.1);
   box-shadow: 0 0 15px rgba(255, 77, 157, 0.15);
 }
+/* Divider between the research directions and the project browser */
+.proj-sub{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:64px;padding-top:28px;border-top:1px solid var(--line);scroll-margin-top:88px}
 /* Projects Tab Selector */
 .proj-tabs {
   display: flex;
@@ -1038,7 +1041,6 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
     <a class="brand" href="#"><b>Y</b>uxuan Cai</a>
     <div class="topnav">
       <a href="#about">About</a>
-      <a href="#research">Research</a>
       <a href="#papers">Papers</a>
       <a href="#projects">Projects</a>
       <a href="#awards">Awards</a>
@@ -1069,7 +1071,6 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
     <a class="brand" href="#" onclick="location.hash='';return false"><b>Y</b>uxuan Cai</a>
     <nav class="section-tabs" aria-label="Sections">
       <button class="s-tab" data-page="about"    onclick="location.hash='about'">About</button>
-      <button class="s-tab" data-page="research" onclick="location.hash='research'">Research</button>
       <button class="s-tab" data-page="papers"   onclick="location.hash='papers'">Papers</button>
       <button class="s-tab" data-page="projects" onclick="location.hash='projects'">Projects</button>
       <button class="s-tab" data-page="awards"   onclick="location.hash='awards'">Awards</button>
@@ -1107,30 +1108,9 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
       <div class="page-footer"><div class="pf-left">© <span class="yr">2026</span> Yuxuan Cai · UNC Chapel Hill</div><div class="pf-right"><a href="https://scholar.google.com/citations?user=V1_-l2IAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Scholar ↗</a></div></div>
     </section>
 
-    <!-- RESEARCH -->
-    <section class="page" id="page-research">
-      <div class="s-head"><div class="eyebrow">01 · Research</div><h2 class="s-title reveal" tabindex="-1">Research <em>directions</em></h2></div>
-      <div class="globe-panel reveal">
-        <div id="globe"></div>
-        <div class="globe-legend" aria-hidden="true">
-          <div class="gl-t">Field sites</div>
-          <div class="gl-row"><span>Chapel Hill — base</span><span class="gl-dot" style="background:var(--magenta);box-shadow:0 0 8px var(--magenta)"></span></div>
-          <div class="gl-row"><span>Study cities</span><span class="gl-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span></div>
-          <div class="gl-row"><span>Alma maters</span><span class="gl-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span></div>
-        </div>
-      </div>
-      <p class="globe-cap reveal">Research footprint — field sites mapped from published work. Drag to explore.</p>
-      <div class="grid-3">
-        <div class="card r-card reveal"><div class="r-n">01</div><h3>Urban Perception &amp; Vision-Language Models</h3><p>How people experience urban environments — via crowdsourced data, street-view imagery, and social media — and how AI systems represent those perceptions.</p><div class="tags"><span class="tag">VLM / CLIP</span><span class="tag">Street View</span><span class="tag">NLP</span></div></div>
-        <div class="card r-card reveal"><div class="r-n">02</div><h3>LLM Planning Simulation &amp; Decision-Making</h3><p>LLM multi-agent frameworks that model planning decision processes — behavioral bias, intent understanding, negotiation, and alignment in policy contexts.</p><div class="tags"><span class="tag">Multi-Agent LLM</span><span class="tag">Planning AI</span><span class="tag">Intent</span></div></div>
-        <div class="card r-card reveal"><div class="r-n">03</div><h3>Urban Health &amp; Environmental Justice</h3><p>Long-term environmental exposures — air pollution, heat, green-space inequality — and their disparate effects on health across demographic groups.</p><div class="tags"><span class="tag">Env. Health</span><span class="tag">GIS</span><span class="tag">Equity</span></div></div>
-      </div>
-      <div class="page-footer"><div class="pf-left">© <span class="yr">2026</span> Yuxuan Cai</div></div>
-    </section>
-
     <!-- PAPERS -->
     <section class="page" id="page-papers">
-      <div class="s-head"><div class="eyebrow">02 · Publications</div><h2 class="s-title reveal" tabindex="-1">Selected <em>papers</em></h2></div>
+      <div class="s-head"><div class="eyebrow">01 · Publications</div><h2 class="s-title reveal" tabindex="-1">Selected <em>papers</em></h2></div>
 
       <div class="chart-wrap reveal">
         <div class="chart-head">
@@ -1179,8 +1159,26 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- PROJECTS -->
     <section class="page" id="page-projects">
-      <div class="s-head"><div class="eyebrow">03 · Projects</div><h2 class="s-title reveal" tabindex="-1">Work &amp; <em>projects</em></h2></div>
-      
+      <div class="s-head"><div class="eyebrow">02 · Projects</div><h2 class="s-title reveal" tabindex="-1">Research &amp; <em>projects</em></h2></div>
+
+      <!-- Research directions (formerly its own page; #research still lands here) -->
+      <div class="globe-panel reveal">
+        <div id="globe"></div>
+        <div class="globe-legend" aria-hidden="true">
+          <div class="gl-t">Field sites</div>
+          <div class="gl-row"><span>Chapel Hill — base</span><span class="gl-dot" style="background:var(--magenta);box-shadow:0 0 8px var(--magenta)"></span></div>
+          <div class="gl-row"><span>Study cities</span><span class="gl-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span></div>
+          <div class="gl-row"><span>Alma maters</span><span class="gl-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span></div>
+        </div>
+      </div>
+      <p class="globe-cap reveal">Research footprint — field sites mapped from published work. Drag to explore.</p>
+      <div class="grid-3">
+        <div class="card r-card reveal"><div class="r-n">01</div><h3>Urban Perception &amp; Vision-Language Models</h3><p>How people experience urban environments — via crowdsourced data, street-view imagery, and social media — and how AI systems represent those perceptions.</p><div class="tags"><span class="tag">VLM / CLIP</span><span class="tag">Street View</span><span class="tag">NLP</span></div></div>
+        <div class="card r-card reveal"><div class="r-n">02</div><h3>LLM Planning Simulation &amp; Decision-Making</h3><p>LLM multi-agent frameworks that model planning decision processes — behavioral bias, intent understanding, negotiation, and alignment in policy contexts.</p><div class="tags"><span class="tag">Multi-Agent LLM</span><span class="tag">Planning AI</span><span class="tag">Intent</span></div></div>
+        <div class="card r-card reveal"><div class="r-n">03</div><h3>Urban Health &amp; Environmental Justice</h3><p>Long-term environmental exposures — air pollution, heat, green-space inequality — and their disparate effects on health across demographic groups.</p><div class="tags"><span class="tag">Env. Health</span><span class="tag">GIS</span><span class="tag">Equity</span></div></div>
+      </div>
+
+      <h3 class="proj-sub reveal" id="proj-browser">Projects by theme</h3>
       <!-- Projects Tab Selector -->
       <div class="proj-tabs reveal" style="margin-top: 16px; margin-bottom: 24px;">
         <button class="proj-tab active" id="proj-tab-research" onclick="switchProjectsTab('research')">Research</button>
@@ -1303,7 +1301,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- AWARDS -->
     <section class="page" id="page-awards">
-      <div class="s-head"><div class="eyebrow">04 · Recognition</div><h2 class="s-title reveal" tabindex="-1">Awards &amp; <em>honors</em></h2></div>
+      <div class="s-head"><div class="eyebrow">03 · Recognition</div><h2 class="s-title reveal" tabindex="-1">Awards &amp; <em>honors</em></h2></div>
       <div class="aw-cat reveal">
         <div class="aw-cat-h aw-c1"><span class="aw-ico"><svg shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g><path d="m30.48 23.62 -1.53 0 0 1.52 3.05 0 0 -6.09 -1.52 0 0 4.57z" fill="currentColor" stroke-width="1"></path><path d="M30.48 14.47H32V16h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="m0 0.76 0 24.38 15.24 0 0 -1.52 -13.72 0 0 -21.34 28.96 0 0 9.15 1.52 0L32 0.76l-32 0z" fill="currentColor" stroke-width="1"></path><path d="M28.95 16h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M28.95 12.95h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="m27.43 20.57 -3.05 0 0 1.52 -1.52 0 0 1.53 -1.53 0 0 -1.53 -1.52 0 0 -1.52 -3.05 0 0 -3.05 -1.52 0 0 4.57 1.52 0 0 9.15 3.05 0 0 -1.53 1.52 0 0 -1.52 1.53 0 0 1.52 1.52 0 0 1.53 3.05 0 0 -9.15 1.52 0 0 -4.57 -1.52 0 0 3.05z" fill="currentColor" stroke-width="1"></path><path d="m28.95 6.86 0 -3.05 -4.57 0 0 1.52 3.05 0 0 1.53 1.52 0z" fill="currentColor" stroke-width="1"></path><path d="M25.9 12.95h1.53v4.57H25.9Z" fill="currentColor" stroke-width="1"></path><path d="M24.38 17.52h1.52v1.53h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M24.38 11.43h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="m27.43 9.9 0 3.05 1.52 0 0 -4.57 -4.57 0 0 1.52 3.05 0z" fill="currentColor" stroke-width="1"></path><path d="M19.81 19.05h4.57v1.52h-4.57Z" fill="currentColor" stroke-width="1"></path><path d="M22.86 6.86h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M21.33 5.33h1.53v1.53h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M19.81 9.9h4.57v1.53h-4.57Z" fill="currentColor" stroke-width="1"></path><path d="M19.81 6.86h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M18.29 17.52h1.52v1.53h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M18.29 11.43h1.52v1.52h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="M16.76 12.95h1.53v4.57h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="m16.76 9.9 3.05 0 0 -1.52 -4.57 0 0 4.57 1.52 0 0 -3.05z" fill="currentColor" stroke-width="1"></path><path d="M13.71 16h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M13.71 12.95h1.53v1.52h-1.53Z" fill="currentColor" stroke-width="1"></path><path d="M12.19 14.47h1.52V16h-1.52Z" fill="currentColor" stroke-width="1"></path><path d="m19.81 5.33 0 -1.52 -16.76 0 0 18.28 10.66 0 0 -1.52 -9.14 0 0 -15.24 15.24 0z" fill="currentColor" stroke-width="1"></path><path d="M6.1 12.95h4.57v1.52H6.1Z" fill="currentColor" stroke-width="1"></path><path d="M6.1 6.86h4.57v4.57H6.1Z" fill="currentColor" stroke-width="1"></path><path d="M6.1 16h4.57v1.52H6.1Z" fill="currentColor" stroke-width="1"></path></g></svg></span>Fellowships &amp; Scholarships</div>
         <div class="aw-grid">
@@ -1337,7 +1335,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- CONTACT -->
     <section class="page" id="page-contact">
-      <div class="s-head"><div class="eyebrow">06 · Contact</div></div>
+      <div class="s-head"><div class="eyebrow">05 · Contact</div></div>
       <div class="contact-grid">
         <div>
           <h2 class="s-title reveal" tabindex="-1">Open to<br><em>collaboration</em></h2>
@@ -1386,7 +1384,7 @@ main#content{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
     <!-- BLOG & TUTORIALS -->
     <section class="page" id="page-blog">
-      <div class="s-head"><div class="eyebrow">05 · Writing</div><h2 class="s-title reveal" tabindex="-1">Blog &amp; <em>tutorials</em></h2></div>
+      <div class="s-head"><div class="eyebrow">04 · Writing</div><h2 class="s-title reveal" tabindex="-1">Blog &amp; <em>tutorials</em></h2></div>
       <p class="lede reveal" style="font-size:clamp(16px,2vw,21px)">Notes, ideas, and hands-on tutorials on urban AI, urban perception, and computational methods — sharing work in progress and what I learn along the way. Newest first.</p>
       <div class="proj-h reveal">Blog</div>
       <div class="post-list reveal">
@@ -4340,7 +4338,7 @@ const HOME=CITIES[0];
 // ── RESEARCH GLOBE (data-viz inside the site, lazy-loaded on first visit) ──
 let rGlobe=null, rGlobeReady=false, rGlobeLoading=null;
 // globe.gl (with three.js) is ~525 KB gzipped, five times the rest of the page;
-// it is fetched the first time the Research tab opens, never on the home load
+// it is fetched the first time the Projects page opens, never on the home load
 function loadGlobeLib(){
   if(typeof Globe!=='undefined') return Promise.resolve();
   if(!rGlobeLoading){
@@ -4354,7 +4352,7 @@ function initResearchGlobe(){
   const el=document.getElementById('globe');
   if(!el) return;
   if(typeof Globe==='undefined'){
-    loadGlobeLib().then(()=>{ initResearchGlobe(); if(document.querySelector('#page-research.active')) startResearchGlobe(); }).catch(()=>{});
+    loadGlobeLib().then(()=>{ initResearchGlobe(); if(document.querySelector('#page-projects.active')) startResearchGlobe(); }).catch(()=>{});
     return;
   }
   try{
@@ -4368,12 +4366,14 @@ function initResearchGlobe(){
     fitResearchGlobe(); window.addEventListener('resize',fitResearchGlobe);
     rGlobe.pointOfView({lat:24,lng:-52,altitude:2.3},0);
     const c=rGlobe.controls(); c.enableZoom=false; c.autoRotate=!REDUCE_MOTION; c.autoRotateSpeed=0.55;
+    // the globe sits above the project list: vertical swipes scroll the page, sideways ones spin it
+    const cv=el.querySelector('canvas'); if(cv) cv.style.touchAction='pan-y';
     rGlobeReady=true; if(REDUCE_MOTION) rGlobe.pauseAnimation();
   }catch(e){}
 }
 function startResearchGlobe(){ if(rGlobe){ fitResearchGlobe(); if(!REDUCE_MOTION) rGlobe.resumeAnimation(); } }
 function stopResearchGlobe(){ if(rGlobe) rGlobe.pauseAnimation(); }
-document.addEventListener('visibilitychange',()=>{ if(document.hidden) stopResearchGlobe(); else if(document.querySelector('#page-research.active')) startResearchGlobe(); });
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) stopResearchGlobe(); else if(document.querySelector('#page-projects.active')) startResearchGlobe(); });
 
 // ── PUBLICATION CHART ──
 const PUBS=[{y:'2023',j:0,c:2},{y:'2024',j:3,c:0},{y:'2025',j:7,c:1},{y:'2026',j:2,c:1}];
@@ -4424,7 +4424,7 @@ function drawChart(animate){
 }
 
 // ── NAVIGATION (hash-routed) ──
-const PAGES=['about','research','papers','projects','awards','blog','contact'];
+const PAGES=['about','papers','projects','awards','blog','contact'];
 let chartDrawn=false;
 function revealPage(id){
   if(!HAS_GSAP()||REDUCE_MOTION) return;
@@ -4441,7 +4441,7 @@ function showPage(id){
   document.querySelectorAll('.s-tab').forEach(t=>{const on=t.dataset.page===id;t.classList.toggle('active',on);t.setAttribute('aria-current',on?'page':'false');});
   if(window.cityStop) window.cityStop();
   if(id==='papers'){ drawChart(!chartDrawn); chartDrawn=true; }
-  if(id==='research'){ initResearchGlobe(); startResearchGlobe(); } else { stopResearchGlobe(); }
+  if(id==='projects'){ initResearchGlobe(); startResearchGlobe(); } else { stopResearchGlobe(); }
   if(id==='projects'){
     // Reset active tab button to research
     document.querySelectorAll('.proj-tab').forEach(btn => btn.classList.remove('active'));
@@ -4489,7 +4489,9 @@ function showCity(){
   stopResearchGlobe();
   window.scrollTo(0,0);
 }
-function route(){const id=location.hash.slice(1); if(PAGES.indexOf(id)>=0) showPage(id); else showCity();}
+// Research was folded into the top of Projects; old #research links still land there
+const PAGE_ALIAS={research:'projects'};
+function route(){const h=location.hash.slice(1), id=PAGE_ALIAS[h]||h; if(PAGES.indexOf(id)>=0) showPage(id); else showCity();}
 window.addEventListener('hashchange',route);
 function openPage(id){location.hash=id;}
 function goBack(){location.hash='';}
@@ -5160,7 +5162,14 @@ function openProjectCategory(catId) {
     entered = true;
     catView.style.display = 'none';
     detView.style.display = 'block';
-    
+    // the research directions sit above the browser, so a category opened from
+    // the top of the page (or from the night walk) would land below the fold
+    const browserHead = document.getElementById('proj-browser');
+    if (browserHead) {
+      const top = browserHead.getBoundingClientRect().top;
+      if (top < 64 || top > window.innerHeight * 0.4) browserHead.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
+    }
+
     const leftCards = detView.querySelectorAll('.proj-list-card');
     const rightPanel = detView.querySelector('.proj-sticky-panel');
     
