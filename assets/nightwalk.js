@@ -25,7 +25,7 @@
   const TOUR=[
     {id:'urban', label:'URBAN AI', anchor:[{txt:'URBAN AI'},{roof:true,kind:undefined}], zoom:2, ay:0.40,
      copy:'Evening. The city is a model, and every lit word on it is one line of research. Follow me from sign to sign, then the walk home.',
-     to:{page:'research',name:'Research'}},
+     to:{page:'projects',name:'Research'}},
     {id:'vision', label:'VISION', anchor:[{txt:'VISION'}], zoom:3, ground:true,
      copy:'Two cameras under the sign. Up here the question is whether a model can read a street the way a person does.',
      cat:'vlm'},

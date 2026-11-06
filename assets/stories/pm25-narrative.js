@@ -258,7 +258,7 @@ const narrative={
           "exhibit": true
         }
       ],
-      "background": "../assets/images/stories/pm25/observatory.png",
+      "background": "../assets/images/stories/pm25/observatory.webp",
       "position": "50% 50%"
     },
     {
@@ -281,7 +281,7 @@ const narrative={
           "exhibit": true
         }
       ],
-      "background": "../assets/images/stories/pm25/observatory.png",
+      "background": "../assets/images/stories/pm25/observatory.webp",
       "position": "50% 50%"
     },
     {
