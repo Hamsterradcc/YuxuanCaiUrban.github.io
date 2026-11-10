@@ -4856,7 +4856,7 @@ const newsDesk=(()=>{
 const PUBS=[{y:'2023',j:0,c:2},{y:'2024',j:3,c:0},{y:'2025',j:7,c:1},{y:'2026',j:3,c:1}];
 function drawChart(animate){
   const svg=document.getElementById('pubchart'); if(!svg) return;
-  const W=720,H=200,padL=24,padB=34,padT=14,padR=14;
+  const W=720,H=200,padL=24,padB=34,padT=24,padR=14;
   const max=Math.max(...PUBS.map(d=>d.j+d.c));
   const plotH=H-padB-padT, plotW=W-padL-padR;
   const bw=plotW/PUBS.length, barW=Math.min(64,bw*0.5);
@@ -4878,13 +4878,15 @@ function drawChart(animate){
       r.setAttribute('class','bar');
       r.setAttribute('x',cx-barW/2);r.setAttribute('width',barW);
       r.setAttribute('rx',4);r.setAttribute('fill',s.col);r.setAttribute('opacity','0.92');
+      // fixed now: yCur has moved on by the time the animation frame runs
+      const y=yCur-s.h;
       if(animate && !REDUCE_MOTION){
         r.setAttribute('y',H-padB);r.setAttribute('height',0);
         svg.appendChild(r);
         requestAnimationFrame(()=>{r.style.transition='y .7s cubic-bezier(.2,.7,.2,1) '+(i*0.06)+'s,height .7s cubic-bezier(.2,.7,.2,1) '+(i*0.06)+'s';
-          r.setAttribute('y',yCur-s.h);r.setAttribute('height',s.h);});
+          r.setAttribute('y',y);r.setAttribute('height',s.h);});
       }else{
-        r.setAttribute('y',yCur-s.h);r.setAttribute('height',s.h);
+        r.setAttribute('y',y);r.setAttribute('height',s.h);
         svg.appendChild(r);
       }
       yCur-=s.h;
