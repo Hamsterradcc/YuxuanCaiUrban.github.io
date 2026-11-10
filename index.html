@@ -1213,12 +1213,13 @@ a.nd-text:hover,a.nd-text:focus-visible{color:var(--accent);text-decoration:unde
       </div>
 
       <div class="paper-tabs">
-        <button class="p-tab active" onclick="switchTab('pub',event)">Published (12)</button>
+        <button class="p-tab active" onclick="switchTab('pub',event)">Published (13)</button>
         <button class="p-tab" onclick="switchTab('rev',event)">Under Review (4)</button>
         <button class="p-tab" onclick="switchTab('conf',event)">Conference (4)</button>
       </div>
 
       <div class="paper-list active" id="tab-pub">
+        <div class="paper-row"><div class="p-year">2026</div><div><div class="p-title">From Social Media Narratives to Experiential Network: A Large Language Model (LLM) Multi-Agent Framework for Mapping the Integrated Mobility-Theme-Affect Network of Citywalk</div><div class="p-venue">Travel Behaviour and Society · in press</div><div class="p-authors">Zhang, C.*, Zhu, D., Liu, Y., Deng, W., &amp; <strong>Cai, Y.</strong></div></div><div class="p-actions"></div></div>
         <div class="paper-row"><div class="p-year">2026</div><div><div class="p-title">Desirable Bikeshare Routes: Nonlinear Impacts of Micro-Level Street Environments</div><div class="p-venue">Transportation Research Part A: Policy and Practice</div><div class="p-authors"><strong>Cai, Y.</strong>, Song, Q., Cheng, Y., Chen, A., Wang, Y., Li, W., &amp; Qiu, W.</div></div><div class="p-actions"><a class="p-btn p-btn-detail" href="projects/bikeshare-routes.html">Details →</a><a class="p-btn" href="https://doi.org/10.1016/j.tra.2026.104962" target="_blank" rel="noopener noreferrer">DOI ↗</a></div></div>
         <div class="paper-row"><div class="p-year">2026</div><div><div class="p-title">Evaluating the Spatial-Temporal Impact of Urban Nature on Urban Vitality in Vancouver: A Social Media and GPS Data Approach</div><div class="p-venue">Land Use Policy</div><div class="p-authors">Huang, Y., Du, J., Chen, M., Lin, Y., Huang, S., &amp; <strong>Cai, Y.</strong></div></div><div class="p-actions"><a class="p-btn p-btn-detail" href="projects/vancouver-urban-nature-vitality.html">Details →</a><a class="p-btn" href="https://doi.org/10.1016/j.landusepol.2025.107824" target="_blank" rel="noopener noreferrer">DOI ↗</a></div></div>
         <div class="paper-row"><div class="p-year">2025</div><div><div class="p-title">Subjective Perception or the Physical Environment: Which Matters More for Public Area Visitation Thresholds Across Different COVID-19 Pandemic Stages?</div><div class="p-venue">Urban Forestry &amp; Urban Greening</div><div class="p-authors"><strong>Cai, Y.</strong>, Huang, Y., Chen, A., Yang, Z., Chen, M., et al.</div></div><div class="p-actions"><a class="p-btn p-btn-detail" href="projects/perception-vs-environment.html">Details →</a><a class="p-btn" href="https://doi.org/10.1016/j.ufug.2025.128835" target="_blank" rel="noopener noreferrer">DOI ↗</a></div></div>
@@ -4852,7 +4853,7 @@ const newsDesk=(()=>{
 })();
 
 // ── PUBLICATION CHART ──
-const PUBS=[{y:'2023',j:0,c:2},{y:'2024',j:3,c:0},{y:'2025',j:7,c:1},{y:'2026',j:2,c:1}];
+const PUBS=[{y:'2023',j:0,c:2},{y:'2024',j:3,c:0},{y:'2025',j:7,c:1},{y:'2026',j:3,c:1}];
 function drawChart(animate){
   const svg=document.getElementById('pubchart'); if(!svg) return;
   const W=720,H=200,padL=24,padB=34,padT=14,padR=14;
